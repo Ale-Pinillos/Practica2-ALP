@@ -72,10 +72,10 @@ miAny _ [] = False --Caso base
 miAny p (x:xs) = p x || miAny p xs --Caso Recursivo
 --Esta lista ya no es vacia
 --Es un caso Recursivo por que se vuelve a llamar asi misma pero con la cola de la lista xs, hasta llegar al caso base 
-
-         | p x = True -- Si x esta dentro de la funcion entonces es verdadera
+	--miAny p (x:xs)
+        --  | p x = True -- Si x esta dentro de la funcion entonces es verdadera
 --Se usa || entonces lo que se agrege despues de esto sera True
-         | = False || (False || (False || False))  --Si ningun elemento cumple con la funcion es False
+        --  | = False || (False || (False || False))  --Si ningun elemento cumple con la funcion es False
 
 --b)Para All:
 
@@ -88,19 +88,19 @@ miAll _ []     = True --Caso base
 miAll p (x:xs) = p x && miAll p xs --Caso Recursivo
 --Esta lista ya no es vacia
 --Es un caso Recursivo por que se vuelve a llamar asi misma pero con la cola de la lista xs, hasta llegar al caso base
-
-         | miAll p xs = True --Si todos los elementos de la lista cumplen la funcion entonces es True
-         | = True   && (False  && ...) --Si al menos hay un elemento que no cumpla con la funcion entonces es False
+	--miAll p (x:xs)
+        -- | miAll p xs = True --Si todos los elementos de la lista cumplen la funcion entonces es True
+        -- | = True   && (False  && ...) --Si al menos hay un elemento que no cumpla con la funcion entonces es False
 
 --Ejercicio 5: 
 
 --- Para Any en términos de map y or
-miAny :: (a -> Bool) -> [a] -> Bool
-miAny p xs = or (map p xs)
+miAnyMap :: (a -> Bool) -> [a] -> Bool
+miAnyMap p xs = or (map p xs)
 
 -- Para All en términos de map y and
-miAll :: (a -> Bool) -> [a] -> Bool
-miAll p xs = and (map p xs)
+miAllMap :: (a -> Bool) -> [a] -> Bool
+miAllMap p xs = and (map p xs)
 
 --Ejercicio 6:
 

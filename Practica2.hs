@@ -1,6 +1,6 @@
 -- Ejercicio 1.I: 
 
-{- Inicio de la función a la que llamé "contar". Cuando la lista está vacía, devuelve 0. El guión bajo indica que no nos importa el
+{- Inicio de la función "contar". Cuando la lista está vacía, devuelve 0. El guión bajo indica que no nos importa el
 valor del primer parámetro en este caso.-}
 
 contar _ [] = 0 -- Caso base: Si la lista está vacía, devolvemos 0.
@@ -15,8 +15,8 @@ contar elemento (c:l) = -- "elemento" es lo que deseamos contar, "c" es la cabez
 eliminar _ [] = [] -- Caso base: Si la lista está vacía, devolvemos la misma lista vacía.
 eliminar e (x:xs) = -- Queremos eliminar a "e" de la lista.
     if e == x -- Caso recursivo: Si "e" es igual a la cabeza...
-        then eliminar e xs -- ... devolvemos la cola de la lista sin sumar nada.
-        else x : eliminar e xs -- Si no son iguales, devolvemos la cabeza y aplicamos la función a la cola.
+        then eliminar e xs -- ... aplicamos la función solo a la cola.
+        else x : eliminar e xs -- Si son diferentes, mantenemos la cabeza y aplicamos la función a la cola.
 
 -- Asignamos valores a variables para posteriormente ponerlas a prueba en la función main.
 listaEjemplo = [3, 1, 5, 2, 4, 1, 3, 2, 5, 4, 2, 1, 5, 3, 4, 2, 1, 5, 3, 4]

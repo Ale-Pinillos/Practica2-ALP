@@ -3,4 +3,4 @@
 ## Integrantes:
 - Alejandro López Pinillos  
 - Lariza Desere García Flores  
-- María Lizbeth  
+- María Lizbeth Martinez Nicolas

@@ -1,32 +1,41 @@
---Ejercicio 1:
+-- Ejercicio 1.I: 
 
-contar :: Eq a => a -> [a] -> Int -- El funcionamiento de la función; recibe 2 parámetros: un elemento y una lista, y devuelve un entero.
+{- Inicio de la función a la que llamé "contar". Cuando la lista está vacía, devuelve 0. El guión bajo indica que no nos importa el
+valor del primer parámetro en este caso.-}
 
-{-
-Inicio de la función a la que llamé "contar". Cuando la lista está vacía, devuelve 0. El guión bajo indica que no nos importa el
-valor del primer parámetro en este caso.
--}
-contar _ [] = 0 
-contar elemento (c:l) = -- "elemento" es lo que deseamos contar, "c" es la cabeza de la lista y "l" es la cola de la lista.
-    if elemento == c  -- Si el elemento que queremos contar es igual a la cabeza de la lista...
-        then 1 + contar elemento l -- ...entonces devolvemos 1 + el resultado de contar el elemento en la cola de la lista.
-        else contar elemento l -- Si no son iguales, aplicamos la función a la cola de la lista sin sumar 1.
+contar _ [] = 0 -- Caso base: Si la lista está vacía, devolvemos 0.
+contar elemento (c:l) = -- "elemento" es lo que deseamos contar, "c" es la cabeza y "l" es la cola de la lista.
+    if elemento == c  -- Caso recursivo: Si el elemento que queremos contar es igual a la cabeza...
+        then 1 + contar elemento l -- ... devolvemos 1 + el resultado de contar el elemento en la cola de la lista.
+        else contar elemento l -- Si no son iguales, aplicamos la función a la cola sin sumar 1.
 
-{- 
-Acá evidenciamos la recursividad en las líneas 11 y 12, ya que utilizamos a la propia función "contar" dentro de su definición.
--}
+-- Acá evidenciamos la recursividad en las líneas 11 y 12, ya que utilizamos a la propia función "contar" dentro de su definición.
 
+-- Ejercicio 1.II:
+eliminar _ [] = [] -- Caso base: Si la lista está vacía, devolvemos la misma lista vacía.
+eliminar e (x:xs) = -- Queremos eliminar a "e" de la lista.
+    if e == x -- Caso recursivo: Si "e" es igual a la cabeza...
+        then eliminar e xs -- ... devolvemos la cola de la lista sin sumar nada.
+        else x : eliminar e xs -- Si no son iguales, devolvemos la cabeza y aplicamos la función a la cola.
+
+-- Asignamos valores a variables para posteriormente ponerlas a prueba en la función main.
 listaEjemplo = [3, 1, 5, 2, 4, 1, 3, 2, 5, 4, 2, 1, 5, 3, 4, 2, 1, 5, 3, 4]
+a = 'a' 
+b = 1
+c = 'o'
+word1 = "parangaricutirimicuaro"
+word2 = "otorrinolaringologo" -- Sin tilde porque luego me da error jajan't.
 
 main = do -- Agregamos la función main para ejecutar el código.
-    let a = 'a' -- Definimos el elemento que queremos contar.
-    print (contar a "parangaricutirimicuaro") -- Llamamos a la función contar para contar las 'a' en "parangaricutirimicuaro".
+-- 1.I:
+    print (contar a word1) -- Llamamos a la función.
+    print (contar b listaEjemplo) -- Probamos la función con otro tipo de dato.
+    print (contar c word2) 
 
-    let b = 1 -- Definimos un elemento de otro tipo y que queremos contar para confirmar que funciona independientemente del tipo de dato.
-    print (contar b listaEjemplo) -- Llamamos a la función de nuevo para contar los 1 en la listaEjemplo.
-
-    let c = 'o' 
-    print (contar c "otorrinolaringólogo") 
+-- 1.II:
+    print (eliminar a word1) -- Invocamos a la función eleminar.
+    print (eliminar b listaEjemplo) -- Corroboramos que funciona independientemente del tipo de dato.
+    print (eliminar c word2)
 
 -- Ejercicio 3:- Cómo definirias or y and en terminos de foldr?
 
@@ -52,7 +61,7 @@ miAny p (x:xs) = p x || miAny p xs --Caso Recursivo
 --Esta lista ya no es vacia
 --Es un caso Recursivo por que se vuelve a llamar asi misma pero con la cola de la lista xs, hasta llegar al caso base 
 
-         | p x = True --Si x esta dentro de la funcion entonces es verdadera
+         | p x = True -- Si x esta dentro de la funcion entonces es verdadera
 --Se usa || entonces lo que se agrege despues de esto sera True
          | = False || (False || (False || False))  --Si ningun elemento cumple con la funcion es False
 

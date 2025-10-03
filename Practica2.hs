@@ -26,16 +26,27 @@ c = 'o'
 word1 = "parangaricutirimicuaro"
 word2 = "otorrinolaringologo" -- Sin tilde porque luego me da error jajan't.
 
-main = do -- Agregamos la función main para ejecutar el código.
--- 1.I:
-    print (contar a word1) -- Llamamos a la función.
-    print (contar b listaEjemplo) -- Probamos la función con otro tipo de dato.
-    print (contar c word2) 
+--EJERCICIO 2: Define las siguientes dos funciones.
 
--- 1.II:
-    print (eliminar a word1) -- Invocamos a la función eleminar.
-    print (eliminar b listaEjemplo) -- Corroboramos que funciona independientemente del tipo de dato.
-    print (eliminar c word2)
+--1) Una función que tome dos listas y devuelva True si todos los elementos de la primera lista también aparecen en la otra.
+
+esSubconjunto :: Eq a => [a] -> [a] -> Bool
+esSubconjunto [] _ = True --Caso Base
+--Si la primera lista está vacía, consideramos que es un subconjunto de cualquier otra lista,
+por lo que devolvemos True. El _ significa que no nos importa cuál sea la segunda lista.
+esSubconjunto (x:xs) ys = (elem x ys) && esSubconjunto xs ys --Paso Recursivo
+--Descompone la primera lista en su primer elemento (x) y el resto (xs).
+--Verifica si x está en la segunda lista (ys) usando la función elem.
+--Usa el operador && (Y lógico) para combinar ese resultado con el resultado de la llamada recursiva
+--Subconjunto xs ys, que hace exactamente lo mismo para el resto de la lista.
+
+--2) Una función que tome dos listas y devuelva una lista con los valores que aparecen en ambas listas.
+
+interseccion :: Eq a => [a] -> [a] -> [a]
+interseccion [] _ = [] --Caso Base: La intersección con una lista vacía es vacía
+interseccion (x:xs) ys --Caso Recursivo (Comienza cuaando la primera lista no es vacia)
+  | elem x ys = x: interseccion xs ys --Si x está en ys, se guarda
+  | otherwise = interseccion xs ys --Si no, se descarta
 
 -- Ejercicio 3:- Cómo definirias or y and en terminos de foldr?
 
@@ -105,3 +116,14 @@ miDropWhile _ [] = []
 miDropWhile p (x:xs)
     | p x       = miDropWhile p xs
     | otherwise = x:xs
+
+main = do -- Agregamos la función main para ejecutar el código.
+-- 1.I:
+    print (contar a word1) -- Llamamos a la función.
+    print (contar b listaEjemplo) -- Probamos la función con otro tipo de dato.
+    print (contar c word2) 
+
+-- 1.II:
+    print (eliminar a word1) -- Invocamos a la función eleminar.
+    print (eliminar b listaEjemplo) -- Corroboramos que funciona independientemente del tipo de dato.
+    print (eliminar c word2)

@@ -1,3 +1,5 @@
+--Ejercicio 1:
+
 contar :: Eq a => a -> [a] -> Int -- El funcionamiento de la función; recibe 2 parámetros: un elemento y una lista, y devuelve un entero.
 
 {-
@@ -26,7 +28,8 @@ main = do -- Agregamos la función main para ejecutar el código.
     let c = 'o' 
     print (contar c "otorrinolaringólogo") 
 
--- 3- Cómo definirias or y and en terminos de foldr?
+-- Ejercicio 3:- Cómo definirias or y and en terminos de foldr?
+
 -- Or siempre nos devuelve true si al menos un elemento es verdad 
 -- And nos devuelve true si todos sus elementos son verdad
 -- Entonces teniendo eso claro:
@@ -68,3 +71,12 @@ miAll p (x:xs) = p x && miAll p xs --Caso Recursivo
          | miAll p xs = True --Si todos los elementos de la lista cumplen la funcion entonces es True
          | = True   && (False  && ...) --Si al menos hay un elemento que no cumpla con la funcion entonces es False
 
+--Ejercicio 5: 
+
+--- Para Any en términos de map y or
+miAny :: (a -> Bool) -> [a] -> Bool
+miAny p xs = or (map p xs)
+
+-- Para All en términos de map y and
+miAll :: (a -> Bool) -> [a] -> Bool
+miAll p xs = and (map p xs)

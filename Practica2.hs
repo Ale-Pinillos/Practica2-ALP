@@ -34,3 +34,37 @@ or' :: [Bool] -> Bool -- Se declara la función tipo lista y regresamos un boole
 or' = foldr (||) False 
 and' :: [Bool] -> Bool -- Declaramos la lista 
 and' = foldr (&&) True
+
+--Ejercicio 4 : Define tu propia versión (recursiva) de any y all.
+
+--a)Para Any:
+
+miAny :: ( a -> Bool ) -> [ a ] -> Bool --Firma de nuestra funcion
+
+miAny _ [] = False --Caso base
+--El guion bajo _ significa que no importa el primer argumento de la funcion
+--Se devuelve False por que no hay nada dentro de la lista entonces no cumple con la firma de la funcion
+
+miAny p (x:xs) = p x || miAny p xs --Caso Recursivo
+--Esta lista ya no es vacia
+--Es un caso Recursivo por que se vuelve a llamar asi misma pero con la cola de la lista xs, hasta llegar al caso base 
+
+         | p x = True --Si x esta dentro de la funcion entonces es verdadera
+--Se usa || entonces lo que se agrege despues de esto sera True
+         | = False || (False || (False || False))  --Si ningun elemento cumple con la funcion es False
+
+--b)Para All:
+
+miAll :: (a -> Bool) -> [a] -> Bool --Firma de nuestra funcion
+
+miAll _ []     = True --Caso base
+--El guion bajo _ significa que no importa el primer argumento de la funcion
+--Este es un conjunto vacio por lo tanto es verdadera ya que no hay nada que pueda contradecirlo
+
+miAll p (x:xs) = p x && miAll p xs --Caso Recursivo
+--Esta lista ya no es vacia
+--Es un caso Recursivo por que se vuelve a llamar asi misma pero con la cola de la lista xs, hasta llegar al caso base
+
+         | miAll p xs = True --Si todos los elementos de la lista cumplen la funcion entonces es True
+         | = True   && (False  && ...) --Si al menos hay un elemento que no cumpla con la funcion entonces es False
+

@@ -26,27 +26,28 @@ c = 'o'
 word1 = "parangaricutirimicuaro"
 word2 = "otorrinolaringologo" -- Sin tilde porque luego me da error jajan't.
 
---EJERCICIO 2: Define las siguientes dos funciones.
+--EJERCICIO 2:
 
---1) Una función que tome dos listas y devuelva True si todos los elementos de la primera lista también aparecen en la otra.
+--1) 
+{- Caso Base: Si la 1era lista está vacía, consideramos que es un subconjunto de cualquier otra lista, así
+que devolvemos True. El guión bajo quiere decir que da igual cuál sea la 2da lista.-}
 
-esSubconjunto :: Eq a => [a] -> [a] -> Bool
-esSubconjunto [] _ = True --Caso Base
---Si la primera lista está vacía, consideramos que es un subconjunto de cualquier otra lista,
-por lo que devolvemos True. El _ significa que no nos importa cuál sea la segunda lista.
-esSubconjunto (x:xs) ys = (elem x ys) && esSubconjunto xs ys --Paso Recursivo
---Descompone la primera lista en su primer elemento (x) y el resto (xs).
---Verifica si x está en la segunda lista (ys) usando la función elem.
---Usa el operador && (Y lógico) para combinar ese resultado con el resultado de la llamada recursiva
---Subconjunto xs ys, que hace exactamente lo mismo para el resto de la lista.
+esSubconjunto [] _ = True 
+esSubconjunto (x:xs) ys = (elem x ys) && esSubconjunto xs ys 
+{- Explicación del caso recursivo:
+Descompone la 1era lista en la cabeza, x, y la cola, xs.
+Verifica con elem si x pertenece a la segunda lista (ys).
+Conecta dicho resultado con la llamada recursiva esSubconjunto xs ys usando los "&&",
+repitiendo el mismo chequeo para el resto de la lista -}
 
---2) Una función que tome dos listas y devuelva una lista con los valores que aparecen en ambas listas.
+--2)
+{- Caso Base: si la primera lista está vacía, no hay elementos en común; por la difinición de 
+intersección de conjuntos el resultado es [].-} 
 
-interseccion :: Eq a => [a] -> [a] -> [a]
-interseccion [] _ = [] --Caso Base: La intersección con una lista vacía es vacía
-interseccion (x:xs) ys --Caso Recursivo (Comienza cuaando la primera lista no es vacia)
-  | elem x ys = x: interseccion xs ys --Si x está en ys, se guarda
-  | otherwise = interseccion xs ys --Si no, se descarta
+interseccion [] _ = [] 
+interseccion (x:xs) ys --Caso Recursivo: Inicia en el momento en que la 1era lista es no vacía.
+  | elem x ys = x: interseccion xs ys -- Si x está en ys, se guarda.
+  | otherwise = interseccion xs ys -- Si no, se elimina y se sigue con la cola.
 
 -- Ejercicio 3:- Cómo definirias or y and en terminos de foldr?
 

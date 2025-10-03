@@ -25,3 +25,12 @@ main = do -- Agregamos la función main para ejecutar el código.
 
     let c = 'o' 
     print (contar c "otorrinolaringólogo") 
+
+-- 3- Cómo definirias or y and en terminos de foldr?
+-- Or siempre nos devuelve true si al menos un elemento es verdad 
+-- And nos devuelve true si todos sus elementos son verdad
+-- Entonces teniendo eso claro:
+or' :: [Bool] -> Bool -- Se declara la función tipo lista y regresamos un booleano 
+or' = foldr (||) False 
+and' :: [Bool] -> Bool -- Declaramos la lista 
+and' = foldr (&&) True

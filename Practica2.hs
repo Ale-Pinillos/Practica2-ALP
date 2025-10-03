@@ -80,3 +80,19 @@ miAny p xs = or (map p xs)
 -- Para All en términos de map y and
 miAll :: (a -> Bool) -> [a] -> Bool
 miAll p xs = and (map p xs)
+
+--Ejercicio 6:
+
+-- Para la función takeWhile recursiva
+miTakeWhile :: (a -> Bool) -> [a] -> [a]
+miTakeWhile _ [] = []
+miTakeWhile p (x:xs)
+    | p x       = x : miTakeWhile p xs
+    | otherwise = []
+
+-- Para la función dropWhile recursiva
+miDropWhile :: (a -> Bool) -> [a] -> [a]
+miDropWhile _ [] = []
+miDropWhile p (x:xs)
+    | p x       = miDropWhile p xs
+    | otherwise = x:xs
